@@ -59,7 +59,7 @@ const Carousel = (props) => {
     const stopMoving = (e) =>{
         setState({...state,isMoving: !state.isMoving});
         handleBounds();
-        autoMoveSlide(e);
+        autoMoveSlide();
     }
     const handleOnSliderExit = () =>{
         setState({...state,isMoving: false});
@@ -89,42 +89,18 @@ const Carousel = (props) => {
     const goToSlide = (e) =>{
         setState({...state, xDiff: sliderNavBar[e.target.id], transition: "0.5s ease-in-out"})
     }
-    const autoMoveSlide = (e) =>{
-        // cant pass event with target.id since event is called from input prop (e.g. image, or other) which does not have id (as ID is set based on input prop array length)
-        // to find which slide is currently being clicked we have to use a little bit of math
+    const autoMoveSlide = () =>{
         let activeSlideId = 0;
-        console.log("current xDiff",state.xDiff);
         for(let i = 0; i < sliderNavBar.length; i++){
-            if(state.xDiff >= sliderNavBar[i]){
+            
+            if(state.xDiff >= sliderNavBar[i] - (slideProps[i].width*0.5)){
                 activeSlideId = i;
+                console.log(sliderNavBar[i])
             }
         }
-        console.log("active slide", activeSlideId);
-
-        let currentSlideWidth = slideProps[activeSlideId].width;
-        let currentSlideMiddlePoint = Math.abs(sliderNavBar[activeSlideId] - (currentSlideWidth / 2));
-
-        if(state.xDiff > currentSlideMiddlePoint){
-            console.log(`nextSlide`)
-            console.log(state.xDiff,currentSlideMiddlePoint)
-            setState({...state, xDiff: sliderNavBar[activeSlideId+1], transition: "0.5s ease-in-out"})
-
-        } else if(state.xDiff >= currentSlideMiddlePoint){
-            setState({...state, xDiff: sliderNavBar[activeSlideId+1], transition: "0.5s ease-in-out"})
-        }
-        else {
-            console.log(`previousSlide`)
-            setState({...state, xDiff: sliderNavBar[activeSlideId], transition: "0.5s ease-in-out"})
-        }
-
-
-        // if(state.xDiff < currentSlideMiddlePoint){
-        //     // back to current
-        // } else {
-        //     // go to next
-        // }
-
-
+        console.log("active slide id left side pos", sliderNavBar[activeSlideId] + slideProps[activeSlideId]);
+        console.log(activeSlideId)
+        setState({...state, xDiff: sliderNavBar[activeSlideId], transition: "0.2s ease-in-out"});
     }
 
 
