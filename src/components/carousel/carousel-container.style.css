@@ -1,0 +1,27 @@
+.carousel-container {
+  height: auto;
+  max-width: 928px;
+  border: 10px solid rgb(81, 255, 0);
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 928px) {
+  .carousel-container {
+    height: auto;
+    max-width: 80%;
+    border: 10px solid rgb(81, 255, 0);
+    overflow: hidden;
+  }
+}
+
+.container-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: auto;
+}
+
+.btn-container {
+  max-block-size: 0;
+  display: flex;
+  justify-content: center;
+}

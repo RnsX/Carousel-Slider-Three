@@ -1,0 +1,5 @@
+.carousel-slide {
+  border: 1px solid rgb(255, 0, 0);
+  width: auto;
+  user-select: none;
+}
